@@ -1,0 +1,191 @@
+openapi: 3.0.0
+info:
+  title: WINE@STORE
+  description: uma loja totalmente voltado para os vinhos brancos de Portugal.
+  version: "1.0"
+servers:
+- url: https://http.org
+  description: Servidor de produção
+- url: https://mockapi.storeexemplo.com/v1
+  description: Servidor de mock para testes
+paths:
+  /vinhos:
+    get:
+      summary: Lista todos os vinhos
+      responses:
+        "200":
+          description: Lista de vinhos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Vinho'
+              examples:
+                exemplo1:
+                  summary: Exemplo de Lista de Vinhos
+                  value:
+                  - id: 1
+                    nome: Flor do Campo
+                    categoria: Branco
+                    ano: 2023
+                    preco: 5.0
+                    about_wine: "O vinho Flor do Campo, foi engarrafado na empresa Somidol, tem seu saber mais suave com um perpectiva em aroma amadeirado com folhas do campo, tendo seus 9 graus, realmente um espetaculo de vinho."
+                  - id: 2
+                    nome: A mulher e o Vinho
+                    categoria: Branco
+                    ano: 2021
+                    preco: 20.0
+                    about_wine: "A mulher e o vinho, envolve a perseverança, singularidade e nobreza da mulher. Boa intensidade aromática com notas evidentes a aromas tropicais,nomeadamente, a maracujá e ananás."
+    post:
+      summary: Adiciona um novo vinho
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VinhoInput'
+            examples:
+              Criacao:
+                summary: Criação de Vinho
+                value: {}
+        required: true
+      responses:
+        "201":
+          description: Vinho criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vinho'
+              examples:
+                vinhoCriado:
+                  summary: Exemplo de Vinho Criado
+                  value:
+                    id: 3
+                    nome: Sauvignon Blanc
+                    categoria: Branco
+                    ano: 2021
+                    preco: 99.99
+  /vinhos/{id}:
+    get:
+      summary: Recupera um vinho específico
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Detalhes do vinho
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vinho'
+              examples:
+                vinhoExemplo:
+                  summary: Exemplo de Vinho
+                  value:
+                    id: 1
+                    nome: Chardonnay
+                    categoria: Branco
+                    ano: 2020
+                    preco: 79.99
+        "404":
+          description: Vinho não encontrado
+    put:
+      summary: Atualiza um vinho específico
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VinhoInput'
+            examples:
+              exemploAtualizacao:
+                summary: Exemplo de Atualização de Vinho
+                value:
+                  nome: Chardonnay Reserva
+                  categoria: Branco
+                  ano: 2021
+                  preco: 89.99
+        required: true
+      responses:
+        "200":
+          description: Vinho atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Vinho'
+              examples:
+                vinhoAtualizado:
+                  summary: Exemplo de Vinho Atualizado
+                  value:
+                    id: 1
+                    nome: Chardonnay Reserva
+                    categoria: Branco
+                    ano: 2021
+                    preco: 89.99
+        "404":
+          description: Vinho não encontrado
+    delete:
+      summary: Deleta um vinho específico
+      parameters:
+      - name: id
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "204":
+          description: Vinho deletado com sucesso
+        "404":
+          description: Vinho não encontrado
+components:
+  schemas:
+    Vinho:
+      type: object
+      properties:
+        id:
+          type: integer
+        nome:
+          type: string
+        categoria:
+          type: string
+        ano:
+          type: integer
+        preco:
+          type: number
+        about_wine:
+          type: string
+          format: float
+    VinhoInput:
+      required:
+      - about_wine
+      - ano
+      - categoria
+      - nome
+      - preco
+      type: object
+      properties:
+        nome:
+          type: string
+        categoria:
+          type: string
+        ano:
+          type: integer
+        preco:
+          type: number
+        about_wine:
+          type: string
+          format: float
