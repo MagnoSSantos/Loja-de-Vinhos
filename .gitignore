@@ -1,0 +1,36 @@
+# Ignore diretórios e arquivos do ambiente virtual
+.venv/
+env/
+venv/
+ENV/
+*.pyc
+__pycache__/
+
+# Ignore o arquivo de configuração local do Python
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.egg
+
+# Ignore logs e arquivos temporários
+*.log
+*.tmp
+
+# Ignore arquivos do Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Ignore banco de dados SQLite local
+*.sqlite3
+*.db
+
+# Ignore arquivos de cache e configurações do IDE
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Ignore arquivos de pacotes do Python e dependências locais
+pip-log.txt
+pip-delete-this-directory.txt
+instance
