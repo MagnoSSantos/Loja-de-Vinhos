@@ -66,7 +66,7 @@ def adicionar_vinho():
 # Rota para obter um vinho específico pelo ID
 @app.route('/vinhos/<int:id>', methods=['GET'])
 def obter_vinho(id):
-    vinho = Vinho.query.get(id)  # Busca o vinho pelo ID
+    vinho = db.session.get(Vinho, id)  # Busca o vinho pelo ID
     if vinho is None:
         abort(404, description="Vinho não encontrado.")
     
@@ -109,7 +109,7 @@ def atualizar_vinho(id):
 # Rota para deletar um vinho pelo ID
 @app.route('/vinhos/<int:id>', methods=['DELETE'])
 def deletar_vinho(id):
-    vinho = Vinho.query.get(id)
+    vinho = db.session.get(Vinho, id)
     if vinho is None:
         abort(404, description="Vinho não encontrado.")
     
