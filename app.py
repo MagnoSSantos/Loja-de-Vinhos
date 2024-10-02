@@ -44,6 +44,17 @@ def adicionar_vinho():
     if not request.json or 'nome' not in request.json:
         abort(400, description="O nome é obrigatório.")
     
+    # Validação extra
+    ano_atual = 2024  # Ano atual
+    ano_vinho = request.json.get('ano', 0)
+    preco_vinho = request.json.get('preco', 0)
+    
+    if ano_vinho > ano_atual:
+        abort(400, description="O ano do vinho não pode ser no futuro.")
+    
+    if preco_vinho <= 0:
+        abort(400, description="O preço do vinho deve ser maior que zero.")
+    
     novo_vinho = Vinho(
         nome=request.json['nome'],
         categoria=request.json['categoria'],
