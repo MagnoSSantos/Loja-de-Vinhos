@@ -1,3 +1,4 @@
-Flask==2.0.1
-Flask-SQLAlchemy==2.5.1
-Werkzeug==2.0.3
+Flask==2.1.0         # Ou a versão mais recente
+Flask-SQLAlchemy==2.5.1  # Ou a versão mais recente
+Werkzeug==2.0.3  # ou uma versão que funcione com Flask
+SQLAlchemy==1.4.39 
