@@ -5,7 +5,7 @@ from flask_sqlalchemy import SQLAlchemy
 app = Flask(__name__)
 
 # Configuração do banco de dados SQLite (o arquivo será criado no mesmo diretório do código)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///vinhos.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://magno:x{W-C3J*+]c3NeSZ@34.79.51.239/magno_schema'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicializando a extensão SQLAlchemy
