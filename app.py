@@ -1,11 +1,13 @@
 from flask import Flask, jsonify, request, abort
 from flask_sqlalchemy import SQLAlchemy
+import os # importar a biblioteca os para acessar variaveis de ambiente
 
 # Inicializando a aplicação Flask
 app = Flask(__name__)
 
 # Configuração do banco de dados SQLite (o arquivo será criado no mesmo diretório do código)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://magno:x{W-C3J*+]c3NeSZ@34.79.51.239/magno_schema'
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+f"mysql://{os.getenv('MYSQL_USER')}:{os.getenv('MYSQL_PASSWORD')}@{os.getenv('MYSQL_HOST')}/{os.getenv('MYSQL_DATABASE')}")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # Inicializando a extensão SQLAlchemy
