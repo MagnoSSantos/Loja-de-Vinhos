@@ -1,0 +1,12 @@
+replicaCount: 2  # Quantidade de réplicas da aplicação
+
+image:
+  repository: seu-registro/flask-app  # Endereço do repositório da imagem Docker
+  pullPolicy: Always  # Política de pull da imagem Docker
+  tag: "latest"  # Tag da imagem Docker
+
+service:
+  type: ClusterIP  # Tipo de serviço (pode ser LoadBalancer se quiser expor para fora do cluster)
+  port: 5000  # Porta que o serviço irá expor
+
+resources: {}  # Limitações de recursos (CPU, memória) podem ser configuradas aqui
